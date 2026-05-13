@@ -181,6 +181,17 @@ section.visible{opacity:1;transform:none}
 .note-box h3{font-family:var(--font-display);color:var(--jungle);margin-bottom:10px}
 .note-box p{font-size:14px;color:#555;line-height:1.7}
 
+/* ── SUMMARY ── */
+.summary-location{background:white;border-radius:16px;padding:20px;margin-bottom:12px;
+  border:1px solid rgba(0,0,0,0.04)}
+.summary-location h3{font-family:var(--font-display);font-size:1.15rem;color:var(--jungle);margin-bottom:4px}
+.summary-location h3 a{color:var(--jungle);text-decoration:none;border-bottom:1px solid var(--gold)}
+.summary-location h3 a:hover{color:var(--ocean)}
+.summary-nights{font-family:var(--font-accent);font-size:.9rem;color:var(--gold);font-style:italic;margin-bottom:10px}
+.summary-activities{list-style:none;padding:0}
+.summary-activities li{padding:4px 0;font-size:.88rem;color:#555;display:flex;align-items:center;gap:8px}
+.summary-activities li::before{content:'·';color:var(--gold);font-weight:700;font-size:1.2rem}
+
 /* ── FOOTER ── */
 .footer{text-align:center;padding:40px 16px;background:var(--jungle);color:rgba(245,239,230,0.5)}
 .footer-title{font-family:var(--font-display);color:var(--gold-light);font-size:1.8rem;margin-bottom:6px}
@@ -224,6 +235,7 @@ section.visible{opacity:1;transform:none}
 <!-- ═══════ NAV ═══════ -->
 <nav class="nav" id="nav">
   <button class="nav-btn active" data-target="flights">✈ Flights</button>
+  <button class="nav-btn" data-target="summary">📋 Summary</button>
   <button class="nav-btn" data-target="itinerary">🗓 Itinerary</button>
   <button class="nav-btn" data-target="hotels">🏨 Hotels</button>
   <button class="nav-btn" data-target="weather">☀ Weather</button>
@@ -278,6 +290,44 @@ section.visible{opacity:1;transform:none}
   <div class="info-card" style="background:rgba(201,168,76,0.06);border:1px solid rgba(201,168,76,0.15)">
     <p style="font-size:14px;color:#666;line-height:1.7">
       💡 <strong style="color:var(--jungle)">Tip:</strong> Booking both legs with American earns AAdvantage miles on the full trip. Book 6–8 weeks ahead for June.
+    </p>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     SUMMARY
+     ═══════════════════════════════════════ -->
+<section id="summary">
+  <div class="section-label">At a Glance</div>
+  <div class="section-title">Trip Summary</div>
+
+  <div class="summary-location">
+    <h3><a href="https://www.hilton.com/en/hotels/lirguwa-waldorf-astoria-costa-rica-punta-cacique/" target="_blank" rel="noopener">Waldorf Astoria Punta Cacique</a> — Guanacaste</h3>
+    <div class="summary-nights">3 nights · Days 1–3</div>
+    <ul class="summary-activities">
+      <li>Ocean-facing pools, spa &amp; Peacock Alley cocktails</li>
+      <li>Hacienda Guachipelín adventure day — ziplining, river tubing, horseback riding, hot springs</li>
+      <li>Catamaran cruise in the Gulf of Papagayo — swimming, dolphins, sunset</li>
+    </ul>
+  </div>
+
+  <div class="summary-location">
+    <h3><a href="https://nayarasprings.com/" target="_blank" rel="noopener">Nayara Springs</a> — La Fortuna</h3>
+    <div class="summary-nights">3 nights · Days 4–6 · Honeymoon pick</div>
+    <ul class="summary-activities">
+      <li>Río Celeste hike — electric-blue waterfall in Tenorio Volcano NP (en route)</li>
+      <li>Místico Hanging Bridges — rainforest canopy walk &amp; wildlife spotting</li>
+      <li>La Fortuna Waterfall — 230ft cascade with turquoise swimming pool</li>
+      <li>Guided sloth &amp; wildlife walk</li>
+      <li>Lake Arenal boat tour</li>
+      <li>Optional white-water rafting (Class III)</li>
+      <li>Nightly volcano-heated hot springs</li>
+    </ul>
+  </div>
+
+  <div class="info-card" style="background:rgba(201,168,76,0.06);border:1px solid rgba(201,168,76,0.15)">
+    <p style="font-size:14px;color:#666;line-height:1.7">
+      <strong style="color:var(--jungle)">7 days · 6 nights · 2 locations</strong> — Beach &amp; luxury on the Pacific coast, then rainforest, volcano &amp; hot springs in the highlands. Scroll to the itinerary below for the full day-by-day breakdown.
     </p>
   </div>
 </section>
@@ -547,7 +597,7 @@ section.visible{opacity:1;transform:none}
   <div class="section-title">Accommodations</div>
 
   <div class="info-card">
-    <h3>Nights 1–3 — Waldorf Astoria Punta Cacique</h3>
+    <h3>Nights 1–3 — <a href="https://www.hilton.com/en/hotels/lirguwa-waldorf-astoria-costa-rica-punta-cacique/" target="_blank" rel="noopener" style="color:var(--jungle);text-decoration:none;border-bottom:1px solid var(--gold)">Waldorf Astoria Punta Cacique</a></h3>
     <div class="carousel" style="margin:12px 0">
       <div class="carousel-track">
         <div class="carousel-slide"><img src="images/waldorf-pools.jpg" alt="Waldorf pools" loading="lazy"><div class="img-caption">Ocean-facing infinity pools</div></div>
@@ -579,7 +629,7 @@ section.visible{opacity:1;transform:none}
         <div class="carousel-dots"></div>
       </div>
       <div class="hotel-info">
-        <div class="hotel-name">Nayara Springs</div>
+        <div class="hotel-name"><a href="https://nayarasprings.com/" target="_blank" rel="noopener" style="color:var(--jungle);text-decoration:none;border-bottom:1px solid var(--gold)">Nayara Springs</a></div>
         <div class="hotel-vibe">Adults-only · Most romantic</div>
         <div class="hotel-desc">Each villa has its own private plunge pool fed by natural hot springs. Ultimate honeymoon privacy. 3 Michelin keys.</div>
         <div class="hotel-price">$700–$1,400/night</div>
@@ -601,7 +651,7 @@ section.visible{opacity:1;transform:none}
         <div class="carousel-dots"></div>
       </div>
       <div class="hotel-info">
-        <div class="hotel-name">Tabacón Thermal Resort</div>
+        <div class="hotel-name"><a href="https://www.tabacon.com/" target="_blank" rel="noopener" style="color:var(--jungle);text-decoration:none;border-bottom:1px solid var(--gold)">Tabacón Thermal Resort</a></div>
         <div class="hotel-vibe">Most authentic hot springs</div>
         <div class="hotel-desc">The only resort where all 18 springs flow by gravity, 77°F to 122°F. Abuts Arenal Volcano National Park.</div>
         <div class="hotel-price">$450–$750/night</div>
@@ -614,7 +664,7 @@ section.visible{opacity:1;transform:none}
     <!-- Springs -->
     <div class="hotel-card">
       <div class="hotel-info">
-        <div class="hotel-name">The Springs Resort &amp; Spa</div>
+        <div class="hotel-name"><a href="https://www.thespringscostarica.com/" target="_blank" rel="noopener" style="color:var(--jungle);text-decoration:none;border-bottom:1px solid var(--gold)">The Springs Resort &amp; Spa</a></div>
         <div class="hotel-vibe">Best amenities · Great for groups</div>
         <div class="hotel-desc">28 hot and cold spring pools, a swim-up bar with Arenal views, and a wildlife sanctuary with 22 animal species.</div>
         <div class="hotel-price">Inquire for rates</div>
@@ -627,7 +677,7 @@ section.visible{opacity:1;transform:none}
     <!-- Kioro -->
     <div class="hotel-card">
       <div class="hotel-info">
-        <div class="hotel-name">Arenal Kioro Suites</div>
+        <div class="hotel-name"><a href="https://www.hotelarenalkioro.com/" target="_blank" rel="noopener" style="color:var(--jungle);text-decoration:none;border-bottom:1px solid var(--gold)">Arenal Kioro Suites</a></div>
         <div class="hotel-vibe">Best value · Closest volcano views</div>
         <div class="hotel-desc">Suites with tall windows and Jacuzzis to maximize the Arenal view. Private hot springs for hotel guests only.</div>
         <div class="hotel-price">Best value luxury option</div>

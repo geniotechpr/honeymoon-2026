@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eu & Isa — Costa Rica Honeymoon</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,300;0,600;1,300&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --jungle:#1a3a2a;--jungle-light:#2d5a3f;--sand:#f5efe6;--gold:#c9a84c;--gold-light:#dfc06a;
+  --coral:#e07a5f;--ocean:#3d7c8c;--cloud:#faf8f4;--lava:#8b3a2a;--mist:rgba(245,239,230,0.95);
+  --font-display:'Playfair Display',Georgia,serif;--font-body:'DM Sans',sans-serif;
+  --font-accent:'Cormorant Garamond',serif;
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-body);background:var(--cloud);color:#2a2a2a;overflow-x:hidden;font-weight:300}
+
+/* ── HERO ── */
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;
+  background:linear-gradient(170deg,var(--jungle) 0%,#1e4430 40%,var(--ocean) 100%);
+  position:relative;overflow:hidden;text-align:center;padding:2rem}
+.hero::before{content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse at 30% 70%,rgba(201,168,76,0.15) 0%,transparent 60%),
+  radial-gradient(ellipse at 80% 20%,rgba(61,124,140,0.2) 0%,transparent 50%);pointer-events:none}
+.hero-pre{font-family:var(--font-accent);color:var(--gold-light);font-size:clamp(1rem,2.5vw,1.4rem);
+  letter-spacing:.3em;text-transform:uppercase;margin-bottom:1rem;opacity:0;animation:fadeUp .8s .3s forwards;font-weight:300}
+.hero h1{font-family:var(--font-display);color:var(--sand);font-size:clamp(2.8rem,8vw,6rem);
+  font-weight:400;line-height:1.1;margin-bottom:.5rem;opacity:0;animation:fadeUp .8s .5s forwards}
+.hero h1 em{font-style:italic;color:var(--gold-light)}
+.hero-sub{font-family:var(--font-accent);color:rgba(245,239,230,0.7);font-size:clamp(1.1rem,2.5vw,1.6rem);
+  margin-top:.8rem;opacity:0;animation:fadeUp .8s .7s forwards;font-weight:300;letter-spacing:.05em}
+.hero-details{display:flex;gap:2rem;margin-top:2.5rem;flex-wrap:wrap;justify-content:center;
+  opacity:0;animation:fadeUp .8s .9s forwards}
+.hero-detail{color:rgba(245,239,230,0.6);font-size:.85rem;letter-spacing:.12em;text-transform:uppercase;
+  display:flex;align-items:center;gap:.5rem}
+.hero-detail span{color:var(--gold);font-size:1.1rem}
+.scroll-hint{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);
+  color:rgba(245,239,230,0.4);font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;
+  opacity:0;animation:fadeUp .8s 1.2s forwards,pulse 2s 2s infinite}
+
+/* ── NAV ── */
+.nav{position:sticky;top:0;z-index:100;background:var(--mist);backdrop-filter:blur(20px);
+  border-bottom:1px solid rgba(201,168,76,0.15);padding:.6rem 1rem;
+  display:flex;gap:.3rem;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.nav::-webkit-scrollbar{display:none}
+.nav-btn{flex-shrink:0;padding:.5rem 1rem;border:none;background:none;font-family:var(--font-body);
+  font-size:.78rem;letter-spacing:.06em;color:#666;cursor:pointer;border-radius:100px;
+  transition:all .25s;white-space:nowrap;font-weight:400}
+.nav-btn:hover{color:var(--jungle)}
+.nav-btn.active{background:var(--jungle);color:var(--sand);font-weight:500}
+
+/* ── CONTENT ── */
+.content{max-width:800px;margin:0 auto;padding:0 1.5rem 4rem}
+section{padding:3rem 0 2rem;opacity:0;transform:translateY(20px);transition:all .6s}
+section.visible{opacity:1;transform:none}
+.section-label{font-family:var(--font-accent);font-size:.85rem;letter-spacing:.25em;
+  text-transform:uppercase;color:var(--gold);margin-bottom:.5rem;font-weight:300}
+.section-title{font-family:var(--font-display);font-size:clamp(1.8rem,5vw,2.6rem);
+  color:var(--jungle);line-height:1.2;margin-bottom:1.5rem}
+
+/* ── CAROUSEL ── */
+.carousel{position:relative;width:100%;border-radius:14px;overflow:hidden;
+  aspect-ratio:16/10;background:#e0dbd2}
+.carousel-track{display:flex;width:100%;height:100%;transition:transform .45s cubic-bezier(.4,0,.2,1)}
+.carousel-slide{min-width:100%;height:100%;position:relative}
+.carousel-slide img{width:100%;height:100%;object-fit:cover;display:block}
+.carousel-slide .img-caption{position:absolute;bottom:0;left:0;right:0;padding:.6rem 1rem;
+  background:linear-gradient(transparent,rgba(0,0,0,.55));color:white;font-size:.75rem;
+  letter-spacing:.03em;font-weight:400}
+.carousel-btn{position:absolute;top:50%;transform:translateY(-50%);width:36px;height:36px;
+  border-radius:50%;border:none;background:rgba(255,255,255,.85);color:var(--jungle);
+  font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;
+  z-index:2;transition:all .2s;box-shadow:0 2px 8px rgba(0,0,0,.15)}
+.carousel-btn:hover{background:white;transform:translateY(-50%) scale(1.1)}
+.carousel-btn.prev{left:8px}
+.carousel-btn.next{right:8px}
+.carousel-dots{position:absolute;bottom:8px;left:50%;transform:translateX(-50%);display:flex;gap:5px;z-index:2}
+.carousel-dot{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.4);
+  border:none;cursor:pointer;transition:all .2s;padding:0}
+.carousel-dot.active{background:white;transform:scale(1.3)}
+
+/* ── MAP LINK ── */
+.map-link{display:flex;align-items:center;gap:8px;padding:10px 14px;background:white;
+  border-radius:12px;border:1px solid rgba(0,0,0,.06);text-decoration:none;color:#555;
+  font-size:13px;margin:10px 0;transition:all .2s;box-shadow:0 1px 6px rgba(0,0,0,.04)}
+.map-link:hover{border-color:var(--gold);box-shadow:0 3px 12px rgba(0,0,0,.08)}
+.map-link .pin{font-size:18px}
+.map-link .arrow{color:var(--ocean);font-size:12px;font-weight:500;margin-left:auto;white-space:nowrap}
+
+/* ── DAY CARDS ── */
+.day-card{background:white;border-radius:16px;margin-bottom:1.5rem;
+  box-shadow:0 2px 20px rgba(0,0,0,0.04);border:1px solid rgba(0,0,0,0.04);
+  transition:all .3s;position:relative;overflow:hidden;cursor:pointer}
+.day-card::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%;
+  background:linear-gradient(180deg,var(--gold),var(--coral));border-radius:4px 0 0 4px;
+  opacity:0;transition:opacity .3s;z-index:1}
+.day-card:hover::before{opacity:1}
+.day-card:hover{box-shadow:0 8px 30px rgba(0,0,0,0.08);transform:translateY(-2px)}
+.day-header{padding:20px 20px 16px;position:relative}
+.day-num{font-family:var(--font-display);font-size:2.5rem;color:var(--gold);opacity:.25;
+  position:absolute;top:10px;right:16px;line-height:1}
+.day-tag{display:inline-block;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;
+  padding:3px 10px;border-radius:100px;margin-bottom:8px;font-weight:500}
+.tag-beach{background:rgba(61,124,140,0.1);color:var(--ocean)}
+.tag-adventure{background:rgba(224,122,95,0.1);color:var(--coral)}
+.tag-transit{background:rgba(201,168,76,0.12);color:#8a7030}
+.tag-nature{background:rgba(45,90,63,0.1);color:var(--jungle-light)}
+.tag-depart{background:rgba(139,58,42,0.1);color:var(--lava)}
+.day-title{font-family:var(--font-display);font-size:1.3rem;color:var(--jungle);margin-bottom:6px}
+.day-summary{color:#555;line-height:1.7;font-size:.92rem}
+.day-details{max-height:0;overflow:hidden;transition:max-height .5s ease;padding:0 20px}
+.day-card.expanded .day-details{max-height:4000px;padding:0 20px 20px}
+.day-detail-section{padding:10px 0;border-top:1px solid rgba(0,0,0,0.05)}
+.day-detail-section h4{font-family:var(--font-accent);font-size:1.05rem;color:var(--jungle);
+  margin-bottom:4px;font-weight:600}
+.day-detail-section p{color:#555;line-height:1.7;font-size:.88rem}
+.rain-note{background:rgba(61,124,140,0.06);border-left:3px solid var(--ocean);
+  padding:10px 14px;border-radius:0 8px 8px 0;margin-top:10px;font-size:13px;color:#4a6a72}
+.expand-hint{font-size:.75rem;color:var(--gold);margin-top:8px;letter-spacing:.05em;font-weight:500}
+.day-card.expanded .expand-hint{display:none}
+
+/* ── FLIGHTS ── */
+.flight-box{background:white;border-radius:16px;padding:20px;margin-bottom:12px;
+  border:1px solid rgba(0,0,0,0.04);display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.flight-route{display:flex;align-items:center;gap:12px;flex:1;min-width:200px}
+.flight-code{font-family:var(--font-display);font-size:1.6rem;color:var(--jungle)}
+.flight-line{flex:1;height:1px;background:linear-gradient(90deg,var(--gold),transparent);
+  position:relative;min-width:30px}
+.flight-line::after{content:'✈';position:absolute;right:0;top:50%;transform:translateY(-50%);
+  color:var(--gold);font-size:.9rem}
+.flight-meta{font-size:13px;color:#888;line-height:1.6}
+.flight-meta strong{color:var(--jungle);font-weight:500}
+
+/* ── HOTELS ── */
+.hotel-grid{display:grid;gap:14px;margin:14px 0}
+.hotel-card{background:white;border-radius:12px;overflow:hidden;border:2px solid transparent;
+  transition:all .3s;position:relative}
+.hotel-card:hover{border-color:var(--gold);transform:translateY(-2px)}
+.hotel-card.recommended::after{content:'♥ Honeymoon Pick';position:absolute;top:10px;right:10px;
+  font-size:11px;background:var(--coral);color:white;padding:3px 10px;border-radius:100px;
+  letter-spacing:.05em;font-weight:500;z-index:2}
+.hotel-info{padding:16px}
+.hotel-name{font-family:var(--font-display);font-size:1.1rem;color:var(--jungle);margin-bottom:3px}
+.hotel-vibe{font-family:var(--font-accent);font-size:.9rem;color:var(--gold);font-style:italic;margin-bottom:6px}
+.hotel-desc{font-size:13px;color:#666;line-height:1.6}
+.hotel-price{font-size:12px;color:#999;margin-top:6px}
+
+/* ── TABLE ── */
+.transport-table{width:100%;border-collapse:separate;border-spacing:0;margin:14px 0;
+  background:white;border-radius:12px;overflow:hidden;border:1px solid rgba(0,0,0,0.04)}
+.transport-table th{background:var(--jungle);color:var(--sand);font-size:11px;
+  letter-spacing:.1em;text-transform:uppercase;padding:10px 14px;text-align:left;font-weight:500}
+.transport-table td{padding:10px 14px;font-size:13px;color:#555;border-bottom:1px solid rgba(0,0,0,0.04)}
+.transport-table tr:last-child td{border-bottom:none}
+
+/* ── INFO / CHECKLIST ── */
+.info-card{background:white;border-radius:16px;padding:20px;margin-bottom:12px;
+  border:1px solid rgba(0,0,0,0.04)}
+.info-card h3{font-family:var(--font-display);font-size:1.2rem;color:var(--jungle);margin-bottom:12px}
+.checklist{list-style:none}
+.checklist li{padding:8px 0;font-size:14px;color:#555;line-height:1.6;
+  border-bottom:1px solid rgba(0,0,0,0.03);display:flex;align-items:flex-start;gap:8px;cursor:pointer;
+  -webkit-user-select:none;user-select:none}
+.checklist li:last-child{border-bottom:none}
+.check-box{width:18px;height:18px;border:2px solid var(--gold);border-radius:4px;flex-shrink:0;
+  margin-top:2px;display:flex;align-items:center;justify-content:center;transition:all .2s;font-size:11px}
+.checklist li.checked .check-box{background:var(--jungle);border-color:var(--jungle);color:white}
+.checklist li.checked>span{text-decoration:line-through;color:#bbb}
+
+/* ── WEATHER ── */
+.weather-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:14px 0}
+.weather-card{background:rgba(245,239,230,0.5);border-radius:12px;padding:16px;text-align:center}
+.weather-icon{font-size:2rem;margin-bottom:4px}
+.weather-region{font-family:var(--font-accent);font-size:1rem;color:var(--jungle);font-weight:600}
+.weather-desc{font-size:12px;color:#777;margin-top:4px;line-height:1.5}
+
+/* ── NOTE BOX ── */
+.note-box{background:linear-gradient(135deg,rgba(45,90,63,0.04),rgba(61,124,140,0.04));
+  border:1px dashed var(--gold);border-radius:16px;padding:24px;margin:24px 0}
+.note-box h3{font-family:var(--font-display);color:var(--jungle);margin-bottom:10px}
+.note-box p{font-size:14px;color:#555;line-height:1.7}
+
+/* ── FOOTER ── */
+.footer{text-align:center;padding:40px 16px;background:var(--jungle);color:rgba(245,239,230,0.5)}
+.footer-title{font-family:var(--font-display);color:var(--gold-light);font-size:1.8rem;margin-bottom:6px}
+.footer-sub{font-family:var(--font-accent);font-size:1.1rem;font-style:italic;letter-spacing:.05em}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+@keyframes pulse{0%,100%{opacity:.4}50%{opacity:.8}}
+
+@media(max-width:600px){
+  .hero{min-height:90vh;padding:1.5rem}
+  .hero-details{gap:1rem}
+  .content{padding:0 1rem 3rem}
+  .day-header{padding:16px 16px 12px}
+  .day-details{padding:0 16px}
+  .day-card.expanded .day-details{padding:0 16px 16px}
+  .flight-box{padding:16px}
+  .weather-grid{grid-template-columns:1fr}
+  .nav{padding:6px 8px}
+  .nav-btn{font-size:12px;padding:5px 10px}
+  .carousel{aspect-ratio:16/11}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════ HERO ═══════ -->
+<div class="hero">
+  <div class="hero-pre">A Honeymoon in</div>
+  <h1><em>Costa Rica</em></h1>
+  <div class="hero-sub">Eu &amp; Isa</div>
+  <div class="hero-details">
+    <div class="hero-detail"><span>✦</span> 7 Days</div>
+    <div class="hero-detail"><span>✦</span> 6 Nights</div>
+    <div class="hero-detail"><span>✦</span> Mid-June</div>
+    <div class="hero-detail"><span>✦</span> JFK → LIR → CLT</div>
+  </div>
+  <div class="scroll-hint">Scroll to explore ↓</div>
+</div>
+
+<!-- ═══════ NAV ═══════ -->
+<nav class="nav" id="nav">
+  <button class="nav-btn active" data-target="flights">✈ Flights</button>
+  <button class="nav-btn" data-target="itinerary">🗓 Itinerary</button>
+  <button class="nav-btn" data-target="hotels">🏨 Hotels</button>
+  <button class="nav-btn" data-target="weather">☀ Weather</button>
+  <button class="nav-btn" data-target="packing">🎒 Packing</button>
+  <button class="nav-btn" data-target="transport">🚐 Transport</button>
+  <button class="nav-btn" data-target="prebook">📋 Pre-Book</button>
+</nav>
+
+<div class="content">
+
+<!-- ═══════════════════════════════════════
+     FLIGHTS
+     ═══════════════════════════════════════ -->
+<section id="flights">
+  <div class="section-label">Getting There &amp; Back</div>
+  <div class="section-title">Flights</div>
+
+  <div class="flight-box">
+    <div class="flight-route">
+      <div class="flight-code">JFK</div>
+      <div class="flight-line"></div>
+      <div class="flight-code">LIR</div>
+    </div>
+    <div class="flight-meta">
+      <strong>Outbound · Nonstop</strong><br>
+      American Airlines or JetBlue · ~5h 20m<br>
+      ~6 flights/week · Fares from ~$185 one-way in June<br>
+      Book the earliest morning departure
+    </div>
+  </div>
+
+  <div class="flight-box">
+    <div class="flight-route">
+      <div class="flight-code">LIR</div>
+      <div class="flight-line"></div>
+      <div class="flight-code">CLT</div>
+    </div>
+    <div class="flight-meta">
+      <strong>Return · Nonstop</strong><br>
+      American Airlines only · ~4h 5m<br>
+      ~10 direct flights/week · Book early<br>
+      Afternoon departure on Day 7
+    </div>
+  </div>
+
+  <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Daniel+Oduber+Quiros+International+Airport+Liberia+Costa+Rica" target="_blank" rel="noopener">
+    <span class="pin">📍</span>
+    <span>LIR — Daniel Oduber Quirós International Airport, Liberia</span>
+    <span class="arrow">Open Map ↗</span>
+  </a>
+
+  <div class="info-card" style="background:rgba(201,168,76,0.06);border:1px solid rgba(201,168,76,0.15)">
+    <p style="font-size:14px;color:#666;line-height:1.7">
+      💡 <strong style="color:var(--jungle)">Tip:</strong> Booking both legs with American earns AAdvantage miles on the full trip. Book 6–8 weeks ahead for June.
+    </p>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     ITINERARY
+     ═══════════════════════════════════════ -->
+<section id="itinerary">
+  <div class="section-label">Day by Day</div>
+  <div class="section-title">The Itinerary</div>
+
+  <a class="map-link" href="https://www.google.com/maps/dir/Daniel+Oduber+Quiros+International+Airport/Waldorf+Astoria+Costa+Rica+Punta+Cacique/Parque+Nacional+Volcan+Tenorio/La+Fortuna+Costa+Rica" target="_blank" rel="noopener" style="margin-bottom:20px">
+    <span class="pin">🗺</span>
+    <span>Full route: LIR → Waldorf → Río Celeste → La Fortuna</span>
+    <span class="arrow">Open Map ↗</span>
+  </a>
+
+  <!-- ── DAY 1 ── -->
+  <div class="day-card" onclick="toggleDay(this)">
+    <div class="carousel" onclick="event.stopPropagation()">
+      <div class="carousel-track">
+        <div class="carousel-slide"><img src="https://thepointsguy.global.ssl.fastly.net/us/originals/2024/06/20240611_115624.jpg" alt="Waldorf pools" loading="lazy"><div class="img-caption">Waldorf Astoria — ocean-facing pools</div></div>
+        <div class="carousel-slide"><img src="https://thepointsguy.global.ssl.fastly.net/us/originals/2024/06/20240611_173007.jpg" alt="Waldorf resort" loading="lazy"><div class="img-caption">Waldorf Astoria Punta Cacique</div></div>
+        <div class="carousel-slide"><img src="https://stories.hilton.com/uploads/2024/06/WA-Costa-Rica_Pool-7.jpg" alt="Sunset at resort" loading="lazy"><div class="img-caption">Sunset at the resort</div></div>
+      </div>
+      <button class="carousel-btn prev" onclick="moveCarousel(this,-1)">‹</button>
+      <button class="carousel-btn next" onclick="moveCarousel(this,1)">›</button>
+      <div class="carousel-dots"></div>
+    </div>
+    <div class="day-header">
+      <div class="day-num">01</div>
+      <span class="day-tag tag-beach">Beach · Arrival</span>
+      <div class="day-title">Arrive &amp; Decompress</div>
+      <div class="day-summary">Fly into LIR, transfer to the Waldorf, explore eight ocean-facing pools, sunset cocktails at Peacock Alley, wagyu dinner at La Finca.</div>
+      <div class="expand-hint">Tap for details ↓</div>
+    </div>
+    <div class="day-details">
+      <div class="day-detail-section">
+        <h4>Afternoon — Settle In</h4>
+        <p>Arrive by midday. Airport SUV transfer to the Waldorf (~45 min). Golf cart orientation, then explore the pools — find your favourite spot together.</p>
+      </div>
+      <div class="day-detail-section">
+        <h4>Sunset — Peacock Alley</h4>
+        <p>Costa Rica sunsets fall 5–6 PM year-round. Be at Peacock Alley — the Waldorf's signature cocktail lounge — by 5pm with a drink in hand.</p>
+      </div>
+      <div class="day-detail-section">
+        <h4>Dinner — La Finca</h4>
+        <p>All beef on property is wagyu. The steak and the heirloom tomato tomatada are standouts. Your first evening as newlyweds in paradise.</p>
+      </div>
+      <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Waldorf+Astoria+Costa+Rica+Punta+Cacique" target="_blank" rel="noopener" onclick="event.stopPropagation()">
+        <span class="pin">📍</span><span>Waldorf Astoria — Playa Penca, Guanacaste</span><span class="arrow">Open Map ↗</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- ── DAY 2 ── -->
+  <div class="day-card" onclick="toggleDay(this)">
+    <div class="carousel" onclick="event.stopPropagation()">
+      <div class="carousel-track">
+        <div class="carousel-slide"><img src="https://nativeswaycostarica.com/wp-content/uploads/2019/03/canyoning-guachipelin.jpg" alt="Canyon ziplining" loading="lazy"><div class="img-caption">Canyon ziplining at Guachipelín</div></div>
+        <div class="carousel-slide"><img src="https://nativeswaycostarica.com/wp-content/uploads/2019/03/guachipelin-adventure-combo-3.jpg" alt="River tubing" loading="lazy"><div class="img-caption">River tubing — Class II–III rapids</div></div>
+        <div class="carousel-slide"><img src="https://www.arenaltransfers.com/wp-content/uploads/2024/06/hacienda-guachipelin-adventure-tour.webp" alt="Hacienda Guachipelin" loading="lazy"><div class="img-caption">Hacienda Guachipelín Adventure Center</div></div>
+      </div>
+      <button class="carousel-btn prev" onclick="moveCarousel(this,-1)">‹</button>
+      <button class="carousel-btn next" onclick="moveCarousel(this,1)">›</button>
+      <div class="carousel-dots"></div>
+    </div>
+    <div class="day-header">
+      <div class="day-num">02</div>
+      <span class="day-tag tag-adventure">Adventure</span>
+      <div class="day-title">Rincón de la Vieja — Full Adventure Day</div>
+      <div class="day-summary">Hacienda Guachipelín One Day Adventure Pass: ziplining, river tubing, horseback riding, volcanic mud baths &amp; hot springs.</div>
+      <div class="expand-hint">Tap for details ↓</div>
+    </div>
+    <div class="day-details">
+      <div class="day-detail-section">
+        <h4>Full Day — Hacienda Guachipelín</h4>
+        <p>Hotel-arranged transport (~45 min). Canyon ziplining and rappelling through Río Blanco Canyon, 5km river tubing, horseback riding, Costa Rican buffet lunch with live marimba, and Rio Negro hot springs with volcanic mud baths. Plan for 8–9 hours — one of the best adventure days in all of Costa Rica.</p>
+      </div>
+      <div class="rain-note">🌧 Activities run all morning. Afternoon rain during hot springs is actually pleasant — warm volcanic pools in the rain are extraordinary.</div>
+      <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Hotel+Hacienda+Guachipelin+Costa+Rica" target="_blank" rel="noopener" onclick="event.stopPropagation()">
+        <span class="pin">📍</span><span>Hacienda Guachipelín — Rincón de la Vieja</span><span class="arrow">Open Map ↗</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- ── DAY 3 ── -->
+  <div class="day-card" onclick="toggleDay(this)">
+    <div class="carousel" onclick="event.stopPropagation()">
+      <div class="carousel-track">
+        <div class="carousel-slide"><img src="https://kimkim.imgix.net/2025/02/05/6a10bdf2-27d5-42b5-8d47-66f6a37cb7e5-catamaran_sailing_papagayo_gulf.jpeg" alt="Catamaran sailing" loading="lazy"><div class="img-caption">Catamaran cruise — Gulf of Papagayo</div></div>
+        <div class="carousel-slide"><img src="https://papagayosailingtours.com/wp-content/uploads/2023/07/Papagayo-Sailing-Tours-catamaran-sailing-Guanacaste-Costa-Rica-27.webp" alt="Sailing" loading="lazy"><div class="img-caption">Sailing the Pacific coast</div></div>
+        <div class="carousel-slide"><img src="https://bloway.com/wp-content/uploads/2019/10/DSC_4474-scaled.jpg" alt="Ocean swim" loading="lazy"><div class="img-caption">Jump in — the captain stops mid-ocean</div></div>
+      </div>
+      <button class="carousel-btn prev" onclick="moveCarousel(this,-1)">‹</button>
+      <button class="carousel-btn next" onclick="moveCarousel(this,1)">›</button>
+      <div class="carousel-dots"></div>
+    </div>
+    <div class="day-header">
+      <div class="day-num">03</div>
+      <span class="day-tag tag-beach">Beach · Leisure</span>
+      <div class="day-title">Gulf of Papagayo — Catamaran Cruise</div>
+      <div class="day-summary">Morning catamaran with unlimited drinks, ocean swimming, dolphin spotting. Afternoon at the resort pools &amp; spa. Final Waldorf dinner.</div>
+      <div class="expand-hint">Tap for details ↓</div>
+    </div>
+    <div class="day-details">
+      <div class="day-detail-section">
+        <h4>Morning — Catamaran</h4>
+        <p>Arranged through the Waldorf concierge. Unlimited drinks, the captain stops so you can swim in the open Pacific, dolphin sightings common. A perfect romantic morning for you two.</p>
+      </div>
+      <div class="day-detail-section">
+        <h4>Afternoon — Resort Day</h4>
+        <p>Return mid-afternoon. Pools, spa, or Peacock Alley. Final dinner at the Waldorf — savour it.</p>
+      </div>
+      <div class="day-detail-section">
+        <h4>☀ Optional Swap — Llanos de Cortez Waterfall</h4>
+        <p>Prefer adventure? A breathtaking cascade into a wide swimmable pool, ~20 min from Liberia. Arrive before 10am.</p>
+      </div>
+      <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Gulf+of+Papagayo+Costa+Rica" target="_blank" rel="noopener" onclick="event.stopPropagation()">
+        <span class="pin">📍</span><span>Gulf of Papagayo</span><span class="arrow">Open Map ↗</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- ── DAY 4 ── -->
+  <div class="day-card" onclick="toggleDay(this)">
+    <div class="carousel" onclick="event.stopPropagation()">
+      <div class="carousel-track">
+        <div class="carousel-slide"><img src="https://travellersworldwide.com/wp-content/uploads/2022/09/Shutterstock_1413582498.png" alt="Rio Celeste" loading="lazy"><div class="img-caption">Río Celeste — impossibly blue water</div></div>
+        <div class="carousel-slide"><img src="https://www.roughguides.com/wp-content/uploads/2024/07/shutterstock_1408419430-1920x1280.jpg" alt="Rio Celeste waterfall" loading="lazy"><div class="img-caption">Río Celeste waterfall — Tenorio Volcano NP</div></div>
+        <div class="carousel-slide"><img src="https://www.traveloffpath.com/wp-content/uploads/2024/07/Rio-Celeste-Waterfall-In-Costa-Rica.jpg" alt="Trail" loading="lazy"><div class="img-caption">The trail through Tenorio National Park</div></div>
+      </div>
+      <button class="carousel-btn prev" onclick="moveCarousel(this,-1)">‹</button>
+      <button class="carousel-btn next" onclick="moveCarousel(this,1)">›</button>
+      <div class="carousel-dots"></div>
+    </div>
+    <div class="day-header">
+      <div class="day-num">04</div>
+      <span class="day-tag tag-transit">Transit · Nature</span>
+      <div class="day-title">Río Celeste → La Fortuna</div>
+      <div class="day-summary">Private driver via the Río Celeste scenic route — turning a transit day into a trip highlight. Evening hot springs.</div>
+      <div class="expand-hint">Tap for details ↓</div>
+    </div>
+    <div class="day-details">
+      <div class="day-detail-section">
+        <h4>Morning — Drive to Río Celeste</h4>
+        <p>Private driver (~2 hours from Liberia area). ⚠️ Tenorio Volcano National Park tickets must be pre-purchased via the SINAC website — timed entry, no walk-ups.</p>
+      </div>
+      <div class="day-detail-section">
+        <h4>Midday — The Trail</h4>
+        <p>3–4 hours for the waterfall, Mirador viewpoint, Laguna Azul, the Borbollones boiling spring, and Teñideros — where two clear rivers merge and the water turns impossibly blue. Lunch outside the park.</p>
+      </div>
+      <div class="day-detail-section">
+        <h4>Evening — Arrive La Fortuna</h4>
+        <p>2 more hours to La Fortuna. Check in and head straight to the thermal pools. Soaking in volcano-heated water at dusk after a day of hiking — the ideal arrival ritual.</p>
+      </div>
+      <div class="rain-note">🌧 Ask your driver to check river conditions that morning. Heavy rain can turn the blue water grey-brown. If so, take the direct route and revisit as a day trip.</div>
+      <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Parque+Nacional+Volcan+Tenorio+Costa+Rica" target="_blank" rel="noopener" onclick="event.stopPropagation()">
+        <span class="pin">📍</span><span>Parque Nacional Volcán Tenorio — Río Celeste</span><span class="arrow">Open Map ↗</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- ── DAY 5 ── -->
+  <div class="day-card" onclick="toggleDay(this)">
+    <div class="carousel" onclick="event.stopPropagation()">
+      <div class="carousel-track">
+        <div class="carousel-slide"><img src="https://www.visionsoftravel.org/wp-content/uploads/2019/08/Mistico-Arenal-Hanging-Bridges-Park-Trail-Walk-Hike-Costa-Rica.jpg" alt="Hanging bridges" loading="lazy"><div class="img-caption">Místico Hanging Bridges — rainforest canopy</div></div>
+        <div class="carousel-slide"><img src="https://www.paradisecatchers.com/wp-content/uploads/2020/11/La-Fortuna-Waterfall-1.jpg" alt="La Fortuna Waterfall" loading="lazy"><div class="img-caption">La Fortuna Waterfall — 230ft cascade</div></div>
+        <div class="carousel-slide"><img src="https://nativeswaycostarica.com/wp-content/uploads/2018/09/arenal-waterfall-hike-4.jpg" alt="Waterfall pool" loading="lazy"><div class="img-caption">Turquoise pool at the base — bring swimsuits!</div></div>
+      </div>
+      <button class="carousel-btn prev" onclick="moveCarousel(this,-1)">‹</button>
+      <button class="carousel-btn next" onclick="moveCarousel(this,1)">›</button>
+      <div class="carousel-dots"></div>
+    </div>
+    <div class="day-header">
+      <div class="day-num">05</div>
+      <span class="day-tag tag-nature">Nature · Adventure</span>
+      <div class="day-title">Volcano, Hanging Bridges &amp; Waterfall</div>
+      <div class="day-summary">Early hanging bridges with wildlife, La Fortuna Waterfall's 500-step descent to a turquoise pool, sunset hot springs.</div>
+      <div class="expand-hint">Tap for details ↓</div>
+    </div>
+    <div class="day-details">
+      <div class="day-detail-section">
+        <h4>7–9am — Místico Hanging Bridges</h4>
+        <p>Guided tour during prime wildlife hours — spider monkeys, howler monkeys, exotic birds, pit vipers. Early morning gives the best Arenal Volcano views before clouds roll in.</p>
+      </div>
+      <div class="day-detail-section">
+        <h4>Midday — La Fortuna Waterfall</h4>
+        <p>230 feet cascading into a turquoise pool, reached by 500 steep steps. Bring swimsuits. Allow 2–3 hours including the swim. Unforgettable together.</p>
+      </div>
+      <div class="day-detail-section">
+        <h4>Evening — Hot Springs at Dusk</h4>
+        <p>Return to your resort for thermal pools with Arenal as the backdrop. The swim-up bar at sunset is particularly magical.</p>
+      </div>
+      <div class="rain-note">🌧 Do the waterfall before afternoon rain. The pool is beautiful in light rain — avoid heavy downpours when steps get slippery.</div>
+      <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Mistico+Hanging+Bridges+Arenal+Costa+Rica" target="_blank" rel="noopener" onclick="event.stopPropagation()">
+        <span class="pin">📍</span><span>Místico Hanging Bridges Park</span><span class="arrow">Open Map ↗</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- ── DAY 6 ── -->
+  <div class="day-card" onclick="toggleDay(this)">
+    <div class="carousel" onclick="event.stopPropagation()">
+      <div class="carousel-track">
+        <div class="carousel-slide"><img src="https://images.squarespace-cdn.com/content/v1/5e4fab5e4c0d2f0a04e8eba3/1663689765792-IUAKLKLIBCXKWXKQJUIR/Untitled+design.png" alt="Sloth" loading="lazy"><div class="img-caption">Sloth spotting — easier in rainy season</div></div>
+        <div class="carousel-slide"><img src="https://nattygal.com/wp-content/uploads/costa-rica-lake-arenal-featured-1200x900.jpg" alt="Lake Arenal" loading="lazy"><div class="img-caption">Lake Arenal with volcano backdrop</div></div>
+        <div class="carousel-slide"><img src="https://arenal.net/wp-content/uploads/2023/03/Arenal-Volcano-Costa-Rica-eruption.jpg" alt="Arenal Volcano" loading="lazy"><div class="img-caption">Arenal Volcano rising above the landscape</div></div>
+      </div>
+      <button class="carousel-btn prev" onclick="moveCarousel(this,-1)">‹</button>
+      <button class="carousel-btn next" onclick="moveCarousel(this,1)">›</button>
+      <div class="carousel-dots"></div>
+    </div>
+    <div class="day-header">
+      <div class="day-num">06</div>
+      <span class="day-tag tag-nature">Nature · Adventure</span>
+      <div class="day-title">Sloths, Lake Arenal &amp; Rafting</div>
+      <div class="day-summary">Guided wildlife walk for sloths &amp; frogs, scenic Lake Arenal boat tour, optional Class III rafting. Final hot springs soak.</div>
+      <div class="expand-hint">Tap for details ↓</div>
+    </div>
+    <div class="day-details">
+      <div class="day-detail-section">
+        <h4>Morning — Wildlife Walk</h4>
+        <p>Guided tour for sloths, poison dart frogs, iguanas, and dozens of bird species. In rainy season, sloths are more active foraging for fresh leaves — June is excellent for this.</p>
+      </div>
+      <div class="day-detail-section">
+        <h4>Midday — Lake Arenal</h4>
+        <p>Scenic boat or kayak tour with the volcano rising behind the lake. Lunch at a lakeside restaurant. Pure romance.</p>
+      </div>
+      <div class="day-detail-section">
+        <h4>Afternoon — Rafting or Spa</h4>
+        <p>White-water rafting on the Arenal River (Class III, ~2 hours) — rivers are fuller in June. Or: spa and a final long soak in the hot springs together.</p>
+      </div>
+      <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Lake+Arenal+Costa+Rica" target="_blank" rel="noopener" onclick="event.stopPropagation()">
+        <span class="pin">📍</span><span>Lake Arenal</span><span class="arrow">Open Map ↗</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- ── DAY 7 ── -->
+  <div class="day-card" onclick="toggleDay(this)">
+    <div class="day-header">
+      <div class="day-num">07</div>
+      <span class="day-tag tag-depart">Departure</span>
+      <div class="day-title">Fly Home</div>
+      <div class="day-summary">Leave La Fortuna by 7am. Private shuttle to LIR (~3 hours). Nonstop to Charlotte — 4h 5m. Home. The honeymoon memories begin their long, wonderful life.</div>
+      <div class="expand-hint">Tap for details ↓</div>
+    </div>
+    <div class="day-details">
+      <div class="day-detail-section">
+        <h4>Morning — Transfer &amp; Flight</h4>
+        <p>Private shuttle, direct route. LIR is small and relaxed — allow 2 hours for international departure. Fly LIR → CLT nonstop. Pura Vida forever.</p>
+      </div>
+      <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Daniel+Oduber+Quiros+International+Airport+Liberia+Costa+Rica" target="_blank" rel="noopener" onclick="event.stopPropagation()">
+        <span class="pin">📍</span><span>LIR Airport — Liberia</span><span class="arrow">Open Map ↗</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     HOTELS
+     ═══════════════════════════════════════ -->
+<section id="hotels">
+  <div class="section-label">Where to Stay</div>
+  <div class="section-title">Accommodations</div>
+
+  <div class="info-card">
+    <h3>Nights 1–3 — Waldorf Astoria Punta Cacique</h3>
+    <div class="carousel" style="margin:12px 0">
+      <div class="carousel-track">
+        <div class="carousel-slide"><img src="https://thepointsguy.global.ssl.fastly.net/us/originals/2024/06/20240611_115624.jpg" alt="Waldorf pools" loading="lazy"><div class="img-caption">Ocean-facing infinity pools</div></div>
+        <div class="carousel-slide"><img src="https://stories.hilton.com/uploads/2024/06/WA-Costa-Rica_Pool-7.jpg" alt="Sunset" loading="lazy"><div class="img-caption">Sunset over Playa Penca</div></div>
+        <div class="carousel-slide"><img src="https://thepointsguy.global.ssl.fastly.net/us/originals/2024/06/20240611_173007.jpg" alt="Resort" loading="lazy"><div class="img-caption">Waldorf Astoria grounds</div></div>
+      </div>
+      <button class="carousel-btn prev" onclick="moveCarousel(this,-1)">‹</button>
+      <button class="carousel-btn next" onclick="moveCarousel(this,1)">›</button>
+      <div class="carousel-dots"></div>
+    </div>
+    <p style="font-size:14px;color:#555;line-height:1.7">Playa Penca, Pacific Coast of Guanacaste. 17 miles from LIR. Eight ocean-facing pools, Peacock Alley cocktail bar, La Finca restaurant with wagyu beef, world-class spa. Airport SUV ~$195, 30–45 min.</p>
+    <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Waldorf+Astoria+Costa+Rica+Punta+Cacique" target="_blank" rel="noopener">
+      <span class="pin">📍</span><span>Waldorf Astoria — Playa Penca, Guanacaste</span><span class="arrow">Open Map ↗</span>
+    </a>
+  </div>
+
+  <h3 style="font-family:var(--font-display);color:var(--jungle);font-size:1.1rem;margin:20px 0 12px">Nights 4–6 — La Fortuna (choose your style)</h3>
+
+  <div class="hotel-grid">
+    <!-- Nayara -->
+    <div class="hotel-card recommended">
+      <div class="carousel" style="border-radius:10px 10px 0 0">
+        <div class="carousel-track">
+          <div class="carousel-slide"><img src="https://images.trvl-media.com/lodging/25000000/24210000/24207800/24207733/e9b03b1e.jpg" alt="Nayara Springs" loading="lazy"><div class="img-caption">Private plunge pool villa</div></div>
+          <div class="carousel-slide"><img src="https://kimkim.imgix.net/2025/03/24/65c13ef2-c27f-4c9e-bb88-b4b7b8280770-nayara_springs.jpeg" alt="Nayara villa" loading="lazy"><div class="img-caption">Adults-only rainforest villas</div></div>
+        </div>
+        <button class="carousel-btn prev" onclick="moveCarousel(this,-1)">‹</button>
+        <button class="carousel-btn next" onclick="moveCarousel(this,1)">›</button>
+        <div class="carousel-dots"></div>
+      </div>
+      <div class="hotel-info">
+        <div class="hotel-name">Nayara Springs</div>
+        <div class="hotel-vibe">Adults-only · Most romantic</div>
+        <div class="hotel-desc">Each villa has its own private plunge pool fed by natural hot springs. Ultimate honeymoon privacy. 3 Michelin keys.</div>
+        <div class="hotel-price">$700–$1,400/night</div>
+      </div>
+      <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Nayara+Springs+La+Fortuna+Costa+Rica" target="_blank" rel="noopener" style="margin:0 12px 12px">
+        <span class="pin">📍</span><span>Nayara Springs</span><span class="arrow">Open Map ↗</span>
+      </a>
+    </div>
+
+    <!-- Tabacon -->
+    <div class="hotel-card">
+      <div class="carousel" style="border-radius:10px 10px 0 0">
+        <div class="carousel-track">
+          <div class="carousel-slide"><img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/29/4c/1c/e1/tabacon-thermal-resort.jpg" alt="Tabacon springs" loading="lazy"><div class="img-caption">Natural thermal springs at dusk</div></div>
+          <div class="carousel-slide"><img src="https://media.cntraveler.com/photos/5c3be0c0ee476e37c5f1c24e/16:9/w_1920,c_limit/Tabacon-Thermal-Resort-&-Spa_2019_1.-Property-Main-Image.jpg" alt="Tabacon" loading="lazy"><div class="img-caption">Tabacón — volcano-facing resort</div></div>
+        </div>
+        <button class="carousel-btn prev" onclick="moveCarousel(this,-1)">‹</button>
+        <button class="carousel-btn next" onclick="moveCarousel(this,1)">›</button>
+        <div class="carousel-dots"></div>
+      </div>
+      <div class="hotel-info">
+        <div class="hotel-name">Tabacón Thermal Resort</div>
+        <div class="hotel-vibe">Most authentic hot springs</div>
+        <div class="hotel-desc">The only resort where all 18 springs flow by gravity, 77°F to 122°F. Abuts Arenal Volcano National Park.</div>
+        <div class="hotel-price">$450–$750/night</div>
+      </div>
+      <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Tabacon+Thermal+Resort+Costa+Rica" target="_blank" rel="noopener" style="margin:0 12px 12px">
+        <span class="pin">📍</span><span>Tabacón Thermal Resort</span><span class="arrow">Open Map ↗</span>
+      </a>
+    </div>
+
+    <!-- Springs -->
+    <div class="hotel-card">
+      <div class="hotel-info">
+        <div class="hotel-name">The Springs Resort &amp; Spa</div>
+        <div class="hotel-vibe">Best amenities · Great for groups</div>
+        <div class="hotel-desc">28 hot and cold spring pools, a swim-up bar with Arenal views, and a wildlife sanctuary with 22 animal species.</div>
+        <div class="hotel-price">Inquire for rates</div>
+      </div>
+      <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=The+Springs+Resort+Spa+La+Fortuna+Costa+Rica" target="_blank" rel="noopener" style="margin:0 12px 12px">
+        <span class="pin">📍</span><span>The Springs Resort &amp; Spa</span><span class="arrow">Open Map ↗</span>
+      </a>
+    </div>
+
+    <!-- Kioro -->
+    <div class="hotel-card">
+      <div class="hotel-info">
+        <div class="hotel-name">Arenal Kioro Suites</div>
+        <div class="hotel-vibe">Best value · Closest volcano views</div>
+        <div class="hotel-desc">Suites with tall windows and Jacuzzis to maximize the Arenal view. Private hot springs for hotel guests only.</div>
+        <div class="hotel-price">Best value luxury option</div>
+      </div>
+      <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Hotel+Arenal+Kioro+Suites+Spa+Costa+Rica" target="_blank" rel="noopener" style="margin:0 12px 12px">
+        <span class="pin">📍</span><span>Arenal Kioro Suites</span><span class="arrow">Open Map ↗</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     WEATHER
+     ═══════════════════════════════════════ -->
+<section id="weather">
+  <div class="section-label">What to Expect</div>
+  <div class="section-title">June Weather</div>
+  <p style="font-size:14px;color:#555;line-height:1.8;margin-bottom:16px">
+    Mid-June is Costa Rica's "green season." The pattern: <strong>mornings are clear and beautiful, rain arrives 2–4pm and passes in 1–2 hours.</strong> The entire itinerary is built to work with this rhythm.
+  </p>
+  <div class="weather-grid">
+    <div class="weather-card">
+      <div class="weather-icon">☀️</div>
+      <div class="weather-region">Guanacaste</div>
+      <div class="weather-desc">Driest part of the country. Hard rains don't start until August. Your Waldorf days will likely be mostly dry.</div>
+    </div>
+    <div class="weather-card">
+      <div class="weather-icon">🌤</div>
+      <div class="weather-region">La Fortuna</div>
+      <div class="weather-desc">Sunny mornings with good Arenal views. Afternoon/evening rainstorm for an hour or two. All activities planned for mornings.</div>
+    </div>
+  </div>
+  <div class="rain-note" style="margin-top:16px">
+    🌧 <strong>Río Celeste watch:</strong> Heavy rain in preceding days can turn the blue river grey-brown. Have the driver check conditions the morning of Day 4.
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     PACKING
+     ═══════════════════════════════════════ -->
+<section id="packing">
+  <div class="section-label">Be Prepared</div>
+  <div class="section-title">Packing List</div>
+
+  <div class="info-card">
+    <h3>🌧 Rain Essentials</h3>
+    <ul class="checklist">
+      <li onclick="toggleCheck(this)"><div class="check-box"></div><span>Lightweight packable rain poncho (skip umbrella)</span></li>
+      <li onclick="toggleCheck(this)"><div class="check-box"></div><span>Quick-dry everything — no cotton</span></li>
+      <li onclick="toggleCheck(this)"><div class="check-box"></div><span>Waterproof sandals/shoes</span></li>
+      <li onclick="toggleCheck(this)"><div class="check-box"></div><span>Dry bag / waterproof pouch for phone &amp; camera</span></li>
+      <li onclick="toggleCheck(this)"><div class="check-box"></div><span>Rain cover for daypack</span></li>
+    </ul>
+  </div>
+  <div class="info-card">
+    <h3>☀ Heat &amp; Humidity</h3>
+    <ul class="checklist">
+      <li onclick="toggleCheck(this)"><div class="check-box"></div><span>Sunscreen (UV is intense even with clouds)</span></li>
+      <li onclick="toggleCheck(this)"><div class="check-box"></div><span>DEET / picaridin insect repellent</span></li>
+      <li onclick="toggleCheck(this)"><div class="check-box"></div><span>Microfiber towel</span></li>
+      <li onclick="toggleCheck(this)"><div class="check-box"></div><span>Electrolyte packets</span></li>
+      <li onclick="toggleCheck(this)"><div class="check-box"></div><span>Refillable water bottle (tap water is safe!)</span></li>
+    </ul>
+  </div>
+  <div class="info-card">
+    <h3>👔 Clothing</h3>
+    <ul class="checklist">
+      <li onclick="toggleCheck(this)"><div class="check-box"></div><span>Shorts &amp; t-shirts (you'll live in these)</span></li>
+      <li onclick="toggleCheck(this)"><div class="check-box"></div><span>One smart dinner outfit for Waldorf</span></li>
+      <li onclick="toggleCheck(this)"><div class="check-box"></div><span>Light fleece for La Fortuna evenings</span></li>
+      <li onclick="toggleCheck(this)"><div class="check-box"></div><span>Swimsuits (plural — nothing dries fast enough)</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     TRANSPORT
+     ═══════════════════════════════════════ -->
+<section id="transport">
+  <div class="section-label">No Driving Required</div>
+  <div class="section-title">Transport</div>
+  <p style="font-size:14px;color:#555;line-height:1.7;margin-bottom:16px">Private shuttles and hotel-arranged transport throughout. You two just sit back and enjoy the scenery.</p>
+  <table class="transport-table">
+    <thead><tr><th>Leg</th><th>Mode</th><th>Cost</th></tr></thead>
+    <tbody>
+      <tr><td>LIR → Waldorf</td><td>Hotel SUV shuttle</td><td>~$195</td></tr>
+      <tr><td>Waldorf → Rincón de la Vieja</td><td>Guachipelín transport</td><td>Included</td></tr>
+      <tr><td>Waldorf → Río Celeste → La Fortuna</td><td>Private shuttle (scenic)</td><td>~$200–250</td></tr>
+      <tr><td>La Fortuna activities</td><td>Hotel taxis &amp; tour pickups</td><td>Per activity</td></tr>
+      <tr><td>La Fortuna → LIR</td><td>Private shuttle</td><td>~$180–200</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ═══════════════════════════════════════
+     PRE-BOOK
+     ═══════════════════════════════════════ -->
+<section id="prebook">
+  <div class="section-label">Don't Miss Out</div>
+  <div class="section-title">Pre-Book Before Travel</div>
+  <p style="font-size:14px;color:#555;line-height:1.7;margin-bottom:16px">These sell out — especially in June when crowds are lower but tour capacity is also reduced.</p>
+  <div class="info-card">
+    <ul class="checklist">
+      <li onclick="toggleCheck(this)"><div class="check-box"></div><span><strong>Río Celeste / Tenorio NP</strong> — timed entry via SINAC website (mandatory)</span></li>
+      <li onclick="toggleCheck(this)"><div class="check-box"></div><span><strong>Hacienda Guachipelín Pass</strong> — guachipelin.com</span></li>
+      <li onclick="toggleCheck(this)"><div class="check-box"></div><span><strong>Místico Hanging Bridges</strong> — misticopark.com</span></li>
+      <li onclick="toggleCheck(this)"><div class="check-box"></div><span><strong>Catamaran cruise</strong> — Waldorf concierge or Viator</span></li>
+      <li onclick="toggleCheck(this)"><div class="check-box"></div><span><strong>Wildlife / sloth tour</strong> — hotel concierge</span></li>
+      <li onclick="toggleCheck(this)"><div class="check-box"></div><span><strong>Rafting</strong> — hotel concierge</span></li>
+    </ul>
+  </div>
+  <div class="note-box">
+    <h3>💚 Next Time — Monteverde Cloud Forest</h3>
+    <p>Despite being only 15km from La Fortuna as the crow flies, Monteverde takes 3.5–4 hours by road. Adding it would mean cutting La Fortuna short or extending to 8–9 days. If you return, two nights there adds cloud forest bridges, Central America's longest zipline, and the Continental Divide atmosphere. The perfect excuse for trip number two.</p>
+  </div>
+</section>
+
+</div><!-- .content -->
+
+<!-- ═══════ FOOTER ═══════ -->
+<div class="footer">
+  <div class="footer-title">Eu &amp; Isa</div>
+  <div class="footer-sub">Pura Vida 🌿</div>
+</div>
+
+<script>
+// ── Carousel ──
+function initCarousels(){
+  document.querySelectorAll('.carousel').forEach(function(c){
+    var track=c.querySelector('.carousel-track');
+    var slides=track.querySelectorAll('.carousel-slide');
+    var dotsContainer=c.querySelector('.carousel-dots');
+    if(!dotsContainer||slides.length<2){
+      var pb=c.querySelector('.carousel-btn.prev'),nb=c.querySelector('.carousel-btn.next');
+      if(pb)pb.style.display='none';
+      if(nb)nb.style.display='none';
+      return;
+    }
+    c.dataset.current='0';
+    for(var i=0;i<slides.length;i++){
+      var dot=document.createElement('button');
+      dot.className='carousel-dot'+(i===0?' active':'');
+      dot.dataset.index=String(i);
+      dot.onclick=function(e){e.stopPropagation();goToSlide(c,parseInt(this.dataset.index))};
+      dotsContainer.appendChild(dot);
+    }
+  });
+}
+function goToSlide(carousel,index){
+  var track=carousel.querySelector('.carousel-track');
+  var slides=track.querySelectorAll('.carousel-slide');
+  var dots=carousel.querySelectorAll('.carousel-dot');
+  if(index<0)index=slides.length-1;
+  if(index>=slides.length)index=0;
+  track.style.transform='translateX(-'+index*100+'%)';
+  for(var i=0;i<dots.length;i++){
+    dots[i].classList.toggle('active',i===index);
+  }
+  carousel.dataset.current=String(index);
+}
+function moveCarousel(btn,dir){
+  if(event)event.stopPropagation();
+  var carousel=btn.closest('.carousel');
+  var current=parseInt(carousel.dataset.current||'0');
+  goToSlide(carousel,current+dir);
+}
+
+// Touch swipe
+var touchStartX=0;
+document.addEventListener('touchstart',function(e){
+  if(e.target.closest('.carousel'))touchStartX=e.touches[0].clientX;
+},{passive:true});
+document.addEventListener('touchend',function(e){
+  var carousel=e.target.closest('.carousel');
+  if(!carousel)return;
+  var diff=touchStartX-(e.changedTouches[0].clientX);
+  if(Math.abs(diff)>40){
+    var current=parseInt(carousel.dataset.current||'0');
+    goToSlide(carousel,current+(diff>0?1:-1));
+  }
+},{passive:true});
+
+// ── Nav ──
+document.querySelectorAll('.nav-btn').forEach(function(btn){
+  btn.addEventListener('click',function(){
+    document.querySelectorAll('.nav-btn').forEach(function(b){b.classList.remove('active')});
+    btn.classList.add('active');
+    var target=document.getElementById(btn.dataset.target);
+    if(target){
+      var navH=document.getElementById('nav').offsetHeight;
+      window.scrollTo({top:target.getBoundingClientRect().top+window.scrollY-navH-10,behavior:'smooth'});
+    }
+  });
+});
+
+// ── Scroll reveal ──
+var observer=new IntersectionObserver(function(entries){
+  entries.forEach(function(e){if(e.isIntersecting)e.target.classList.add('visible')});
+},{threshold:0.08});
+document.querySelectorAll('section').forEach(function(s){observer.observe(s)});
+
+// ── Active nav on scroll ──
+var sections=document.querySelectorAll('section[id]');
+window.addEventListener('scroll',function(){
+  var navH=document.getElementById('nav').offsetHeight+20;
+  var current='';
+  sections.forEach(function(s){if(window.scrollY>=s.offsetTop-navH-50)current=s.id});
+  if(current){
+    document.querySelectorAll('.nav-btn').forEach(function(b){
+      b.classList.toggle('active',b.dataset.target===current);
+    });
+  }
+});
+
+// ── Day expand ──
+function toggleDay(card){card.classList.toggle('expanded')}
+
+// ── Checklist ──
+function toggleCheck(li){
+  li.classList.toggle('checked');
+  var box=li.querySelector('.check-box');
+  box.textContent=li.classList.contains('checked')?'✓':'';
+}
+
+// Init
+initCarousels();
+</script>
+</body>
+</html>
